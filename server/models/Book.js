@@ -1,7 +1,7 @@
 const { Schema } = require('mongoose');
 
 
-const booksSchema = new Schema({
+const bookSchema = new Schema({
   authors: [
     {
       type: String,
@@ -24,4 +24,4 @@ const booksSchema = new Schema({
   },
 });
 
-module.exports = booksSchema;
+module.exports = bookSchema;
