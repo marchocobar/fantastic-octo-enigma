@@ -1,25 +1,36 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import {
-  Jumbotron,
+  Modal,
   Container,
   Col,
   Form,
   Button,
   Card,
   CardColumns,
-} from 'react-bootstrap';
+  InputGroup,
+} from "react-bootstrap";
 
-import { useMutation } from '@apollo/client';
-import { SAVE_BOOK } from '../utils/mutations';
-import { saveBookIds, getSavedBookIds } from '../utils/localStorage';
+import { useMutation } from "@apollo/client";
+import { SAVE_BOOK } from "../utils/mutations";
+import { saveBookIds, getSavedBookIds } from "../utils/localStorage";
 
-import Auth from '../utils/auth';
+import Auth from "../utils/auth";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleArrowRight } from "@fortawesome/free-solid-svg-icons";
+
+const element = <FontAwesomeIcon icon={faCircleArrowRight} size="lg" />;
 
 const SearchBooks = () => {
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  
   // create state for holding returned google api data
   const [searchedBooks, setSearchedBooks] = useState([]);
   // create state for holding our search field data
-  const [searchInput, setSearchInput] = useState('');
+  const [searchInput, setSearchInput] = useState("");
 
   // create state to hold saved bookId values
   const [savedBookIds, setSavedBookIds] = useState(getSavedBookIds());
@@ -46,21 +57,21 @@ const SearchBooks = () => {
       );
 
       if (!response.ok) {
-        throw new Error('something went wrong!');
+        throw new Error("something went wrong!");
       }
 
       const { items } = await response.json();
 
       const bookData = items.map((book) => ({
         bookId: book.id,
-        authors: book.volumeInfo.authors || ['No author to display'],
+        authors: book.volumeInfo.authors || ["No author to display"],
         title: book.volumeInfo.title,
         description: book.volumeInfo.description,
-        image: book.volumeInfo.imageLinks?.thumbnail || '',
+        image: book.volumeInfo.imageLinks?.thumbnail || "",
       }));
 
       setSearchedBooks(bookData);
-      setSearchInput('');
+      setSearchInput("");
     } catch (err) {
       console.error(err);
     }
@@ -91,12 +102,13 @@ const SearchBooks = () => {
   return (
     <>
       {/* <Jumbotron fluid className="text-dark"> */}
-        <Container>
-          <h1>Search for Books!</h1>
-          <Form onSubmit={handleFormSubmit}>
-            <Form.Row>
-              <Col xs={12} md={8}>
+      <Container className="m-5">
+        <Form onSubmit={handleFormSubmit}>
+          <Form.Row>
+            <Col>
+              <InputGroup className="col-md-7">
                 <Form.Control
+                  className="rounded-pill"
                   name="searchInput"
                   value={searchInput}
                   onChange={(e) => setSearchInput(e.target.value)}
@@ -104,22 +116,21 @@ const SearchBooks = () => {
                   size="lg"
                   placeholder="Search for a book"
                 />
-              </Col>
-              <Col xs={12} md={4}>
-                <Button type="submit" variant="success" size="lg">
-                  Submit Search
+                <Button className="rounded-circle ml-2 btn-dark" type="submit">
+                  {element}
                 </Button>
-              </Col>
-            </Form.Row>
-          </Form>
-        </Container>
+              </InputGroup>
+            </Col>
+          </Form.Row>
+        </Form>
+      </Container>
       {/* </Jumbotron> */}
 
       <Container>
         <h2>
           {searchedBooks.length
             ? `Viewing ${searchedBooks.length} results:`
-            :''}
+            : ""}
         </h2>
         <CardColumns>
           {searchedBooks.map((book) => {
@@ -136,6 +147,23 @@ const SearchBooks = () => {
                   <Card.Title>{book.title}</Card.Title>
                   <p className="small">Authors: {book.authors}</p>
                   <Card.Text>{book.description}</Card.Text>
+                  
+                  <Button variant="primary" onClick={handleShow}>
+                    Read More
+                  </Button>
+
+                  <Modal show={show} onHide={handleClose}>
+                    <Modal.Header closeButton>
+                      <Modal.Title>Description</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>{book.description}</Modal.Body>
+                    <Modal.Footer>
+                      <Button variant="secondary" onClick={handleClose}>
+                        Close
+                      </Button>
+                    </Modal.Footer>
+                  </Modal>
+
                   {Auth.loggedIn() && (
                     <Button
                       disabled={savedBookIds?.some(
@@ -145,8 +173,8 @@ const SearchBooks = () => {
                       onClick={() => handleSaveBook(book.bookId)}
                     >
                       {savedBookIds?.some((savedId) => savedId === book.bookId)
-                        ? 'Book Already Saved!'
-                        : 'Save This Book!'}
+                        ? "Book Already Saved!"
+                        : "Save This Book!"}
                     </Button>
                   )}
                 </Card.Body>
