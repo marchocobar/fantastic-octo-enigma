@@ -5,12 +5,12 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--pink);
-  background-image: url(./assets/image/BackImage.png);
+  /* background-image: url(./assets/image/BackImage.png);
   background-size: contain;
   background-repeat: no-repeat;
   background-position: right 40px;
   background-size: 500px;
-  background-attachment: fixed;
+  background-attachment: fixed; */
 }
 
 code {
@@ -27,7 +27,9 @@ code {
   top: 5px;
   right: 0%;
   margin-right: 8px;
-  background-color: white;
+  background-color: transparent;
 }
+
+
 
 
