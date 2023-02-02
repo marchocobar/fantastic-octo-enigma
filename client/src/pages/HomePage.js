@@ -10,7 +10,7 @@ import {
   InputGroup,
 } from "react-bootstrap";
 
-import image from "./assets/image/backgroundImage"
+// import image from "./assets/image/backgroundImage"
 
 import { useMutation } from "@apollo/client";
 import { SAVE_BOOK } from "../utils/mutations";
@@ -19,9 +19,9 @@ import { saveBookIds, getSavedBookIds } from "../utils/localStorage";
 import Auth from "../utils/auth";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
-const element = <FontAwesomeIcon icon={faCircleArrowRight} size="lg" />;
+const element = <FontAwesomeIcon icon={faMagnifyingGlass} size="lg" />;
 
 const SearchBooks = () => {
   const [show, setShow] = useState(false);
@@ -104,11 +104,13 @@ const SearchBooks = () => {
   return (
     <>
       {/* <Jumbotron fluid className="text-dark"> */}
-      <Container className="m-5" style={{backgroundImage: `url(${image})`}}>
+      <Container className="m-5" >
         <Form onSubmit={handleFormSubmit}>
           <Form.Row>
-            <Col>
-              <InputGroup className="col-md-7">
+            
+            <>
+              <InputGroup className="col-md-6">
+                
                 <Form.Control
                   className="rounded-pill"
                   name="searchInput"
@@ -118,11 +120,12 @@ const SearchBooks = () => {
                   size="lg"
                   placeholder="Search for a book"
                 />
-                <Button className="rounded-circle ml-2 btn-dark" type="submit">
+                <Button className="rounded-pill btn-light btn-search" type="submit">
                   {element}
                 </Button>
               </InputGroup>
-            </Col>
+             </> 
+           
           </Form.Row>
         </Form>
       </Container>
