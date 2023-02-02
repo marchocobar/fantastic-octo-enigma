@@ -1,11 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Antic&display=swap');
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Antic', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--pink);
+  /* background-image: url(./assets/image/BackImage.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: right 40px;
+  background-size: 500px;
+  background-attachment: fixed; */
 }
 
 code {
@@ -16,3 +21,15 @@ code {
 :root {
   --pink: #e6dbdb;
 }
+
+.btn-search {
+  position: absolute;
+  top: 5px;
+  right: 0%;
+  margin-right: 8px;
+  background-color: transparent;
+}
+
+
+
+

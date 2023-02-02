@@ -10,6 +10,7 @@ import { setContext } from '@apollo/client/link/context';
 
 import SearchBooks from './pages/HomePage';
 import SavedBooks from './pages/BookShelf';
+import BestSellers from './pages/BestSellers';
 import Navbar from './components/Nav';
 
 // Construct our main GraphQL API endpoint
@@ -50,6 +51,10 @@ function App() {
             <Route 
               path="/saved" 
               element={<SavedBooks/>} 
+            />
+            <Route 
+              path="/bestsellers" 
+              element={<BestSellers/>} 
             />
             <Route 
               path='*' 
