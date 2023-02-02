@@ -10,6 +10,8 @@ import {
   InputGroup,
 } from "react-bootstrap";
 
+import image from "./assets/image/backgroundImage"
+
 import { useMutation } from "@apollo/client";
 import { SAVE_BOOK } from "../utils/mutations";
 import { saveBookIds, getSavedBookIds } from "../utils/localStorage";
@@ -102,7 +104,7 @@ const SearchBooks = () => {
   return (
     <>
       {/* <Jumbotron fluid className="text-dark"> */}
-      <Container className="m-5">
+      <Container className="m-5" style={{backgroundImage: `url(${image})`}}>
         <Form onSubmit={handleFormSubmit}>
           <Form.Row>
             <Col>
