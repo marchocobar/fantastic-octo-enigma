@@ -15,7 +15,7 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    bookShelf: [bookSchema],
+    savedBooks: [bookSchema],
   },
   {
     toJSON: {
