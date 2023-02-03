@@ -103,16 +103,16 @@ const SearchBooks = () => {
   };
   return (
     <>
-      {/* <Jumbotron fluid className="text-dark"> */}
+      
       <Container fluid className="m-2" style={{backgroundImage: `url(${image})`, backgroundSize: 'contain', backgroundRepeat:'no-repeat', height:'70vh', backgroundPosition:'right'}} >
         <Form onSubmit={handleFormSubmit}>
           <Form.Row>
             
             <>
-              <InputGroup className="col-md-6 m-5 " >
+              <InputGroup className="col-md-6 m-5 mb-3 " >
                 
                 <Form.Control
-                  className="rounded-pill"
+                  className="rounded-pill p-3"
                   name="searchInput"
                   value={searchInput}
                   onChange={(e) => setSearchInput(e.target.value)}
@@ -129,7 +129,7 @@ const SearchBooks = () => {
           </Form.Row>
         </Form>
       </Container>
-      {/* </Jumbotron> */}
+  
 
       <Container>
         <h2>
@@ -184,6 +184,7 @@ const SearchBooks = () => {
                   )}
                 </Card.Body>
               </Card>
+              
             );
           })}
         </CardColumns>

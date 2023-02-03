@@ -23,12 +23,14 @@ code {
 }
 
 .btn-search {
-  position: absolute;
-  top: 5px;
-  right: 0%;
+  position: relative;
+  top: 0;
+  right: 11%;
   margin-right: 8px;
   background-color: transparent;
 }
+
+
 
 
 
