@@ -60,7 +60,7 @@ const SearchBooks = () => {
 
     try {
       const response = await fetch(
-        `https://www.googleapis.com/books/v1/volumes?q=${searchInput}`
+        `https://www.googleapis.com/books/v1/volumes?q=${searchInput}&maxResults=40`
       );
 
       if (!response.ok) {
