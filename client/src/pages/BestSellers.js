@@ -8,6 +8,7 @@ import {
   Card,
   CardColumns,
   InputGroup,
+  Row
 } from "react-bootstrap";
 
 import { useMutation } from "@apollo/client";
@@ -34,20 +35,24 @@ const BestSellers = () => {
   return (
     <>
       <h1>Bestsellers</h1>
-      <CardColumns className="m-4">
+      <Container>
+        <Row>
         {books.map((book) => {
-          const { author, book_image, description, title, book_image_height, book_image_width } = book;
+          const { author, book_image, description, title } = book;
 
           return (
+            <Col className="col-md-3 d-flex pt-4" style={{alignItems: 'stretch', justifyContent:'center'}}>
             <Card>
               <Card.Img src={book_image}/>
               <Card.Body>
                 <Card.Title>{title} by {author}</Card.Title>
               </Card.Body>
             </Card>
+            </Col>       
           );
         })}
-      </CardColumns>
+      </Row>
+      </Container>
     </>
   );
 };
