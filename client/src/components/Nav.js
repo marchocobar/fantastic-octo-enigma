@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import Auth from '../utils/auth';
+import logo from '../assets/image/ShelfLifeLogo.png';
 
 const user = <FontAwesomeIcon icon={faUser} size="xl" />
 const userCircle = <FontAwesomeIcon icon={faUserCircle} size='lg'/>
@@ -20,8 +21,8 @@ const AppNavbar = () => {
     <>
       <Navbar expand='lg'>
         <Container fluid>
-          <Navbar.Brand as={Link} to='/'>
-            LOGO
+          <Navbar.Brand as={Link} to='/' style={{height:''}}>
+            <img src={logo} height='85px' width={''}></img>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls='navbar' />
           <Navbar.Collapse id='navbar' style={{justifyContent:'end'}}>
