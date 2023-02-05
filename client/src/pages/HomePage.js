@@ -137,7 +137,7 @@ const SearchBooks = () => {
       </Container>
   
 
-      <Container fluid>
+      <Container fluid className="mb-4" >
         <Row>
         
           {searchedBooks.map((book) => {
