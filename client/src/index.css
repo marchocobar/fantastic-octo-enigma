@@ -22,6 +22,16 @@ code {
   --pink: #e6dbdb;
 }
 
+.list-headers {
+  font-weight: bold;
+  /* text-decoration: underline 2px; */
+  border-bottom: solid black 1px ;
+  padding-bottom: 5px;
+  margin: 10px;
+  margin-top: 10px;
+  padding-top: 15px;
+}
+
 /* .btn-search {
   position: absolute;
   right: 2%;

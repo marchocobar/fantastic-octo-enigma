@@ -46,7 +46,6 @@ const SearchBooks = () => {
   const [saveBook, { error }] = useMutation(SAVE_BOOK);
 
   // set up useEffect hook to save `savedBookIds` list to localStorage on component unmount
-  // learn more here: https://reactjs.org/docs/hooks-effect.html#effects-with-cleanup
   useEffect(() => {
     return () => saveBookIds(savedBookIds);
   });
@@ -155,8 +154,10 @@ const SearchBooks = () => {
                 <Card.Body>
                   <Card.Title>{book.title}</Card.Title>
                   <p className="small">Authors: {book.authors}</p>
-                  {/* <Card.Text>{book.description}</Card.Text> */}
                   
+                  
+                </Card.Body>
+                <Card.Footer style={{backgroundColor:'white', border:'none'}}>
                   <Button variant="" onClick={()=>handleShow(book.bookId)} style={{backgroundColor:'white'}}  >
                     {info}
                   </Button>
@@ -168,7 +169,7 @@ const SearchBooks = () => {
                     <Modal.Body>
                       {book.description}
                       </Modal.Body>
-                    <Modal.Footer>
+                    <Modal.Footer >
                       <Button variant="secondary" onClick={handleClose}>
                         Close
                       </Button>
@@ -188,7 +189,7 @@ const SearchBooks = () => {
                         : "Save This Book!"}
                     </Button>
                   )}
-                </Card.Body>
+                </Card.Footer>
               </Card>              
               </Col>
 
