@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Navbar, Nav, Container, Modal, Tab } from 'react-bootstrap';
+import { Navbar, Nav, Container, Modal, Tab, NavDropdown } from 'react-bootstrap';
 import SignUpForm from './SignupForm';
 import LoginForm from './LoginForm';
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import Auth from '../utils/auth';
+
+const user = <FontAwesomeIcon icon={faUser} size="xl" />
+const userCircle = <FontAwesomeIcon icon={faUserCircle} size='lg'/>
+
 
 const AppNavbar = () => {
   // set modal display state
@@ -18,21 +24,21 @@ const AppNavbar = () => {
             LOGO
           </Navbar.Brand>
           <Navbar.Toggle aria-controls='navbar' />
-          <Navbar.Collapse id='navbar'>
+          <Navbar.Collapse id='navbar' style={{justifyContent:'end'}}>
             <Nav className='ml-auto'>
-              <Nav.Link as={Link} to='/bestsellers'>
-                My Bookshelf
-              </Nav.Link>
+              <Nav.Link as={Link} to='/bestsellers' style={{marginRight:'5px'}}>
+                <h2>NY Times Bestsellers</h2>
+              </Nav.Link>             
               {/* if user is logged in show saved books and logout */}
               {Auth.loggedIn() ? (
                 <>
-                  <Nav.Link as={Link} to='/saved'>
-                    My Bookshelf
-                  </Nav.Link>
-                  <Nav.Link onClick={Auth.logout}>Logout</Nav.Link>
+                <NavDropdown title={user}>
+                <NavDropdown.Item as={Link} to='/saved'>My Bookshelf</NavDropdown.Item>
+                <NavDropdown.Item onClick={Auth.logout}>Logout</NavDropdown.Item>
+                </NavDropdown>
                 </>
               ) : (
-                <Nav.Link onClick={() => setShowModal(true)}>Login/Sign Up</Nav.Link>
+                <Nav.Link onClick={() => setShowModal(true)}><h2>Login/Sign Up</h2></Nav.Link>
               )}
             </Nav>
           </Navbar.Collapse>
