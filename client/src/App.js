@@ -8,7 +8,7 @@ import {
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 
-import SearchBooks from './pages/HomePage';
+import HomePage from './pages/HomePage';
 import SavedBooks from './pages/BookShelf';
 import BestSellers from './pages/BestSellers';
 import Navbar from './components/Nav';
@@ -46,7 +46,7 @@ function App() {
           <Routes>
             <Route 
               path="/" 
-              element={<SearchBooks/>} 
+              element={<HomePage/>} 
             />
             <Route 
               path="/saved" 
