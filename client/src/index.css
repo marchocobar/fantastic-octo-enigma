@@ -22,13 +22,15 @@ code {
   --pink: #e6dbdb;
 }
 
-.btn-search {
-  position: relative;
-  top: 0;
-  right: 11%;
-  margin-right: 8px;
+/* .btn-search {
+  position: absolute;
+  right: 2%;
+  margin-top: 4px;
   background-color: transparent;
-}
+  outline: none;
+  border: none;
+  
+} */
 
 
 

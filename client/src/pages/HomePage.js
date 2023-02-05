@@ -6,11 +6,12 @@ import {
   Form,
   Button,
   Card,
-  CardColumns,
   InputGroup,
+  Row
 } from "react-bootstrap";
 
-import image from "../assets/image/BackImage.png"
+import image from "../assets/image/Backimage2.png"
+import NoCover from "../assets/image/NoCoverAvailable.png"
 
 import { useMutation } from "@apollo/client";
 import { SAVE_BOOK } from "../utils/mutations";
@@ -20,14 +21,19 @@ import Auth from "../utils/auth";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 
 const element = <FontAwesomeIcon icon={faMagnifyingGlass} size="lg" />;
+const info = <FontAwesomeIcon icon={faCircleInfo} size="2xl" color=""/>;
+
 
 const SearchBooks = () => {
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(undefined);
 
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleShow = (id) => setShow(id);
+
+
   
   // create state for holding returned google api data
   const [searchedBooks, setSearchedBooks] = useState([]);
@@ -103,16 +109,17 @@ const SearchBooks = () => {
   };
   return (
     <>
-      
-      <Container fluid className="m-2" style={{backgroundImage: `url(${image})`, backgroundSize: 'contain', backgroundRepeat:'no-repeat', height:'70vh', backgroundPosition:'right'}} >
+      <Container fluid className="pt-4" style={{backgroundImage: `url(${image})`, 
+      backgroundSize: 'contain', backgroundRepeat:'no-repeat', height:'50vh', backgroundPosition:'center'}}>
+
+      </Container>
+      <Container fluid >
         <Form onSubmit={handleFormSubmit}>
-          <Form.Row>
-            
-            <>
-              <InputGroup className="col-md-6 m-5 mb-3 " >
-                
+          <Row className="justify-content-md-center">
+            <Col className="col-md-6 mb-4 mt-2">
+              <InputGroup  >
                 <Form.Control
-                  className="rounded-pill p-3"
+                  // className="rounded-pill p-3"
                   name="searchInput"
                   value={searchInput}
                   onChange={(e) => setSearchInput(e.target.value)}
@@ -120,48 +127,47 @@ const SearchBooks = () => {
                   size="lg"
                   placeholder="Search for a book"
                 />
-                <Button className="rounded-pill btn-light btn-search" type="submit">
+                <Button  type="submit" variant="light" style={{backgroundColor:'white'}}>
                   {element}
                 </Button>
               </InputGroup>
-             </> 
-           
-          </Form.Row>
+           </Col>
+          </Row>
         </Form>
       </Container>
   
 
-      <Container>
-        <h2>
-          {searchedBooks.length
-            ? `Viewing ${searchedBooks.length} results:`
-            : ""}
-        </h2>
-        <CardColumns>
+      <Container fluid>
+        <Row>
+        
           {searchedBooks.map((book) => {
             return (
-              <Card key={book.bookId} border="dark">
+              <Col className="col-md-3 d-flex pt-4" style={{alignItems: 'stretch', justifyContent:'center'}}>
+              <Card key={book.bookId}  style={{backgroundColor: 'white', border: 'none', width:'18rem'}}>
                 {book.image ? (
                   <Card.Img
                     src={book.image}
                     alt={`The cover for ${book.title}`}
                     variant="top"
+                    height={'400rem'}
                   />
-                ) : null}
+                ) : <img src={NoCover} height={'400rem'}></img>}
                 <Card.Body>
                   <Card.Title>{book.title}</Card.Title>
                   <p className="small">Authors: {book.authors}</p>
-                  <Card.Text>{book.description}</Card.Text>
+                  {/* <Card.Text>{book.description}</Card.Text> */}
                   
-                  <Button variant="primary" onClick={handleShow}>
-                    Read More
+                  <Button variant="" onClick={()=>handleShow(book.bookId)} style={{backgroundColor:'white'}}  >
+                    {info}
                   </Button>
-
-                  <Modal show={show} onHide={handleClose}>
+                  
+                  <Modal scrollable size="xl" show={show===book.bookId} onHide={handleClose} key={book.bookId}>
                     <Modal.Header closeButton>
                       <Modal.Title>Description</Modal.Title>
                     </Modal.Header>
-                    <Modal.Body>{book.description}</Modal.Body>
+                    <Modal.Body>
+                      {book.description}
+                      </Modal.Body>
                     <Modal.Footer>
                       <Button variant="secondary" onClick={handleClose}>
                         Close
@@ -183,11 +189,14 @@ const SearchBooks = () => {
                     </Button>
                   )}
                 </Card.Body>
-              </Card>
-              
+              </Card>              
+              </Col>
+
             );
           })}
-        </CardColumns>
+        
+        
+        </Row>
       </Container>
     </>
   );
