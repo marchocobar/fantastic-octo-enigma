@@ -13,6 +13,7 @@ import {
 import image from "../assets/image/Backimage2.png"
 import NoCover from "../assets/image/NoCoverAvailable.png"
 
+
 import { useMutation } from "@apollo/client";
 import { SAVE_BOOK } from "../utils/mutations";
 import { saveBookIds, getSavedBookIds } from "../utils/localStorage";
@@ -46,7 +47,6 @@ const SearchBooks = () => {
   const [saveBook, { error }] = useMutation(SAVE_BOOK);
 
   // set up useEffect hook to save `savedBookIds` list to localStorage on component unmount
-  // learn more here: https://reactjs.org/docs/hooks-effect.html#effects-with-cleanup
   useEffect(() => {
     return () => saveBookIds(savedBookIds);
   });
@@ -61,7 +61,7 @@ const SearchBooks = () => {
 
     try {
       const response = await fetch(
-        `https://www.googleapis.com/books/v1/volumes?q=${searchInput}`
+        `https://www.googleapis.com/books/v1/volumes?q=${searchInput}&maxResults=40`
       );
 
       if (!response.ok) {
@@ -137,7 +137,7 @@ const SearchBooks = () => {
       </Container>
   
 
-      <Container fluid>
+      <Container fluid className="mb-4" >
         <Row>
         
           {searchedBooks.map((book) => {
@@ -155,8 +155,10 @@ const SearchBooks = () => {
                 <Card.Body>
                   <Card.Title>{book.title}</Card.Title>
                   <p className="small">Authors: {book.authors}</p>
-                  {/* <Card.Text>{book.description}</Card.Text> */}
                   
+                  
+                </Card.Body>
+                <Card.Footer style={{backgroundColor:'white', border:'none'}}>
                   <Button variant="" onClick={()=>handleShow(book.bookId)} style={{backgroundColor:'white'}}  >
                     {info}
                   </Button>
@@ -168,7 +170,7 @@ const SearchBooks = () => {
                     <Modal.Body>
                       {book.description}
                       </Modal.Body>
-                    <Modal.Footer>
+                    <Modal.Footer >
                       <Button variant="secondary" onClick={handleClose}>
                         Close
                       </Button>
@@ -188,7 +190,7 @@ const SearchBooks = () => {
                         : "Save This Book!"}
                     </Button>
                   )}
-                </Card.Body>
+                </Card.Footer>
               </Card>              
               </Col>
 

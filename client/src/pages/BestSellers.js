@@ -3,58 +3,108 @@ import {
   Modal,
   Container,
   Col,
-  Form,
   Button,
   Card,
-  CardColumns,
-  InputGroup,
-  Row
+  Row,
 } from "react-bootstrap";
 
-import { useMutation } from "@apollo/client";
-
 import axios from "axios";
-import { CardBody } from "react-bootstrap/Card";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
+const info = <FontAwesomeIcon icon={faCircleInfo} size="2xl" color="" />;
 
 const apiKey = "odAC47mAXREvZ3HvHdv5XieoP4WcAzVm";
 
 const BestSellers = () => {
-  const [books, setBooks] = useState([]);
+  const [lists, setLists] = useState([]);
+  const [show, setShow] = useState(undefined);
+
+  const handleClose = () => setShow(false);
+  const handleShow = (id) => setShow(id);
+  //   const [books, setListBooks] = useState([])
 
   useEffect(() => {
     const fetchBooks = async () => {
       const res = await axios.get(
-        `https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json?api-key=${apiKey}`
+        `https://api.nytimes.com/svc/books/v3/lists/overview.json?api-key=${apiKey}`
       );
-      setBooks(res.data.results.books);
-      console.log(res.data.results.books);
+      setLists(res.data.results.lists);
+      //   setListBooks(res.data.results.lists.books)
+      console.log(res.data.results.lists);
     };
     fetchBooks();
   }, []);
 
   return (
     <>
-      <h1>Bestsellers</h1>
-      <Container>
+      <h1 className="m-4" style={{fontWeight:'bold'}}> The New York Times Best Sellers</h1>
+      <Container className="mb-4">
         <Row>
-        {books.map((book) => {
-          const { author, book_image, description, title } = book;
+          {lists.map((list) => {
+            const { list_name, list_id, books } = list;
+            return (
+              <>
+                <h2 key={list_id} className="list-headers">
+                  {list_name}
+                </h2>
+                {books.map((book) => {
+                  const { book_image, author, title, description } = book;
+                  return (
+                    <Col
+                      className="col-md-2 d-flex pt-4"
+                      style={{
+                        alignItems: "stretch",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <Card style={{ width: "18rem" }}>
+                        <Card.Img src={book_image} height={"300rem"} />
+                        <Card.Body>
+                          <Card.Title style={{fontWeight:'bold'}}>{title}</Card.Title>
+                          <p>{author}</p>
+                          
+                          
+                        </Card.Body>
+                        <Card.Footer style={{backgroundColor:'white', border:'none'}}>
+                          <Button
+                            variant=""   
+                            onClick={() => handleShow(book.description)}
+                            style={{ backgroundColor: "white", alignSelf:'end' }}
+                          >
+                            {info}
+                          </Button>
 
-          return (
-            <Col className="col-md-3 d-flex pt-4" style={{alignItems: 'stretch', justifyContent:'center'}}>
-            <Card>
-              <Card.Img src={book_image}/>
-              <Card.Body>
-                <Card.Title>{title} by {author}</Card.Title>
-              </Card.Body>
-            </Card>
-            </Col>       
-          );
-        })}
-      </Row>
+                          <Modal
+                            scrollable
+                            size="xl"
+                            show={show === book.description}
+                            onHide={handleClose}
+                            key={book.description}
+                          >
+                            <Modal.Header closeButton>
+                              <Modal.Title>Description</Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>{description}</Modal.Body>
+                            <Modal.Footer>
+                              <Button variant="secondary" onClick={handleClose}>
+                                Close
+                              </Button>
+                            </Modal.Footer>
+                          </Modal>
+                        </Card.Footer>
+                      </Card>
+                    </Col>
+                  );
+                })}
+              </>
+            );
+          })}
+        </Row>
       </Container>
     </>
   );
 };
 
 export default BestSellers;
+
+
