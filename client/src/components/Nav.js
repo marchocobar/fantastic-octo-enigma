@@ -25,15 +25,15 @@ const AppNavbar = () => {
             <img src={logo} height='85px' width={''}></img>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls='navbar' />
-          <Navbar.Collapse id='navbar' style={{justifyContent:'end'}}>
-            <Nav className='ml-auto'>
-              <Nav.Link as={Link} to='/bestsellers' style={{marginRight:'5px'}}>
-                <h2>NY Times Bestsellers</h2>
+          <Navbar.Collapse id='navbar' style={{justifyContent:'end', paddingRight:'40px'}}>
+            <Nav className=''>
+              <Nav.Link as={Link} to='/bestsellers' style={{marginRight:'10px'}}>
+                <h2 style={{fontWeight:'bold'}}>NY Times Bestsellers</h2>
               </Nav.Link>             
               {/* if user is logged in show saved books and logout */}
               {Auth.loggedIn() ? (
                 <>
-                <NavDropdown title={user}>
+                <NavDropdown title={user} style={{paddingRight:'80px', paddingTop:'7px'}}>
                 <NavDropdown.Item as={Link} to='/saved'>My Bookshelf</NavDropdown.Item>
                 <NavDropdown.Item onClick={Auth.logout}>Logout</NavDropdown.Item>
                 </NavDropdown>
