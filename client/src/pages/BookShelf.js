@@ -65,7 +65,7 @@ const SavedBooks = () => {
         <Row xs={1} md={2} className="g-4">
           {userData.savedBooks?.map((book) => {
             return (
-              <Card key={book.bookId} border="dark" style={{ width: '20rem', height:'30rem' }} id="bookshelf">
+              <Card key={book.bookId} border="dark" style={{ width: '20rem', height:'30rem', margin:'1.5rem'}} id="bookshelf">
                 {book.image ? (
                   <Card.Img
                     src={book.image}

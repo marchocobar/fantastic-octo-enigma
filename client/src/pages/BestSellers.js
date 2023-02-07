@@ -125,3 +125,4 @@ const BestSellers = () => {
 };
 
 export default BestSellers;
+
