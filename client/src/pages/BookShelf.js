@@ -5,6 +5,7 @@ import {
   CardColumns,
   Card,
   Button,
+  Row
 } from 'react-bootstrap';
 
 import { useQuery, useMutation } from '@apollo/client';
@@ -47,9 +48,9 @@ const SavedBooks = () => {
 
   return (
     <>
-      <Jumbotron fluid className="text-light bg-dark">
+      <Jumbotron fluid>
         <Container>
-          <h1>Viewing {userData.username}'s books!</h1>
+          <h1 class="bookShelfHead">Your Bookshlef..</h1>
         </Container>
       </Jumbotron>
       <Container>
@@ -60,21 +61,23 @@ const SavedBooks = () => {
               }:`
             : 'You have no saved books!'}
         </h2>
-        <CardColumns>
+        <CardColumns className='"col-md-2 d-flex pt-4"'>
+        <Row xs={1} md={2} className="g-4">
           {userData.savedBooks?.map((book) => {
             return (
-              <Card key={book.bookId} border="dark">
+              <Card key={book.bookId} border="dark" style={{ width: '20rem', height:'30rem' }} id="bookshelf">
                 {book.image ? (
                   <Card.Img
                     src={book.image}
+                    height={"300rem"}
                     alt={`The cover for ${book.title}`}
                     variant="top"
                   />
                 ) : null}
                 <Card.Body>
                   <Card.Title>{book.title}</Card.Title>
-                  <p className="small">Authors: {book.authors}</p>
-                  <Card.Text>{book.description}</Card.Text>
+                  <Card.Text className="small">Authors: {book.authors}</Card.Text>
+
                   <Button
                     className="btn-block btn-danger"
                     onClick={() => handleDeleteBook(book.bookId)}
@@ -85,6 +88,7 @@ const SavedBooks = () => {
               </Card>
             );
           })}
+          </Row>
         </CardColumns>
       </Container>
     </>

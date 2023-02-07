@@ -25,11 +25,11 @@ const AppNavbar = () => {
             <img src={logo} height='85px' width={''}></img>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls='navbar' />
-          <Navbar.Collapse id='navbar'>
-            <Nav className='ml-auto'>
-              <Nav.Link as={Link} to='/bestsellers'>
-              <h3>NYT Best Sellers</h3>
-              </Nav.Link>
+          <Navbar.Collapse id='navbar' style={{justifyContent:'end', paddingRight:'40px'}}>
+            <Nav className=''>
+              <Nav.Link as={Link} to='/bestsellers' style={{marginRight:'10px'}}>
+                <h2 style={{fontWeight:'bold'}}>NY Times Bestsellers</h2>
+              </Nav.Link>             
               {/* if user is logged in show saved books and logout */}
               {Auth.loggedIn() ? (
                 <>
@@ -39,10 +39,8 @@ const AppNavbar = () => {
                 </NavDropdown>
                 </>
               ) : (
-                <Nav.Link onClick={() => setShowModal(true)}>Login</Nav.Link>
-              ) }
-                <Nav.Link onClick={() => setShowModal(true)}>Sign Up</Nav.Link>
-              
+                <Nav.Link onClick={() => setShowModal(true)}><h2>Login/Sign Up</h2></Nav.Link>
+              )}
             </Nav>
           </Navbar.Collapse>
         </Container>
