@@ -28,7 +28,7 @@ class AuthService {
   }
 
   getToken() {
-e
+
     return localStorage.getItem('id_token');
   }
 
