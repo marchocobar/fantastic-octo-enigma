@@ -60,9 +60,9 @@ const SignupForm = () => {
 
   return (
     <>
-      {/* This is needed for the validation functionality above */}
+      
       <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
-        {/* show alert if server response is bad */}
+        
         <Alert
           dismissible
           onClose={() => setShowAlert(false)}
@@ -109,7 +109,7 @@ const SignupForm = () => {
             )
           }
           type="submit"
-          variant="success"
+          className='btn-dark mt-3'
         >
           Submit
         </Button>

@@ -5,11 +5,15 @@ import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 
+
+
 const info = <FontAwesomeIcon icon={faCircleInfo} size="2xl" color="" />;
 
 const apiKey = "odAC47mAXREvZ3HvHdv5XieoP4WcAzVm";
 
 const BestSellers = () => {
+
+
   const [lists, setLists] = useState([]);
   const [show, setShow] = useState(undefined);
 
@@ -17,6 +21,9 @@ const BestSellers = () => {
   const handleShow = (id) => setShow(id);
   //   const [books, setListBooks] = useState([])
 
+
+
+  
   useEffect(() => {
     const fetchBooks = async () => {
       const res = await axios.get(
@@ -28,6 +35,7 @@ const BestSellers = () => {
     };
     fetchBooks();
   }, []);
+
 
   return (
     <>
@@ -45,7 +53,7 @@ const BestSellers = () => {
                   {list_name}
                 </h2>
                 {books.map((book) => {
-                  const { book_image, author, title, description } = book;
+                  const { book_image, author, title, description, primary_isbn10 } = book;
                   return (
                     <Col
                       className="col-md-2 d-flex pt-4"
@@ -76,6 +84,7 @@ const BestSellers = () => {
                             {info}
                           </Button>
 
+                    
                           <Modal
                             scrollable
                             size="xl"
@@ -92,22 +101,7 @@ const BestSellers = () => {
                                 Close
                               </Button>
 
-                              {/* {Auth.loggedIn() && (
-                                <Button
-                                  disabled={savedBookIds?.some(
-                                    (savedId) => savedId === book.bookId
-                                  )}
-                                  className="btn-light"
-                                  style={{ backgroundColor: "white" }}
-                                  onClick={() => handleSaveBook(book.bookId)}
-                                >
-                                  {savedBookIds?.some(
-                                    (savedId) => savedId === book.bookId
-                                  )
-                                    ? savedIcon
-                                    : addIcon}
-                                </Button>
-                              )} */}
+                              
                             </Modal.Footer>
                           </Modal>
                         </Card.Footer>
