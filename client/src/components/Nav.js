@@ -19,7 +19,7 @@ import logo from "../assets/image/ShelfLifeLogo.png";
 const user = <FontAwesomeIcon icon={faUser} size="xl" />;
 
 const AppNavbar = () => {
-  // set modal display state
+
   const [showModal, setShowModal] = useState(false);
   const [showSignUp, setShowSignUp] = useState(false);
 
@@ -43,7 +43,7 @@ const AppNavbar = () => {
               >
                 <h2 className="nav-header" style={{ fontWeight: "bold" }}>NY Times Bestsellers</h2>
               </Nav.Link>
-              {/* if user is logged in show saved books and logout */}
+              
               {Auth.loggedIn() ? (
                 <>
                   <NavDropdown
