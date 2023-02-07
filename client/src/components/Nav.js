@@ -10,7 +10,7 @@ import Auth from '../utils/auth';
 import logo from '../assets/image/ShelfLifeLogo.png';
 
 const user = <FontAwesomeIcon icon={faUser} size="xl" />
-const userCircle = <FontAwesomeIcon icon={faUserCircle} size='lg'/>
+
 
 
 const AppNavbar = () => {
