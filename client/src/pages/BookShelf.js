@@ -60,7 +60,7 @@ const SavedBooks = () => {
         <h2>
           {userData.savedBooks?.length
             ?` ${
-                userData.savedBooks.length === 1 ? 'book' : 'books'
+                userData.savedBooks.length === 1 ? 'Your book' : 'Your books'
               }:`
             : 'Add to your shelf!'}
         </h2>
