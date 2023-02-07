@@ -62,7 +62,7 @@ const SavedBooks = () => {
             ? `Viewing ${userData.savedBooks.length} saved ${
                 userData.savedBooks.length === 1 ? 'book' : 'books'
               }:`
-            : 'You have no saved books!'}
+            : 'Add to your shelf!'}
         </h2>
         <CardColumns className='"col-md-2 d-flex pt-4"'>
         <Row xs={1} md={2} className="g-4">
