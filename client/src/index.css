@@ -32,6 +32,9 @@ code {
   padding-top: 15px;
 }
 
+.nav-header:hover {
+  text-decoration: underline black;
+}
 /* .btn-search {
   position: absolute;
   right: 2%;
