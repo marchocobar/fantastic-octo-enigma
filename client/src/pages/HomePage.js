@@ -23,9 +23,13 @@ import Auth from "../utils/auth";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
+import { faSquarePlus } from "@fortawesome/free-solid-svg-icons";
+import { faSquareCheck } from "@fortawesome/free-solid-svg-icons";
 
 const element = <FontAwesomeIcon icon={faMagnifyingGlass} size="lg" />;
 const info = <FontAwesomeIcon icon={faCircleInfo} size="2xl" color=""/>;
+const addIcon = <FontAwesomeIcon icon={faSquarePlus} size='2xl'/>;
+const savedIcon = <FontAwesomeIcon icon={faSquareCheck} size='2xl'/>
 
 
 const SearchBooks = () => {
@@ -125,7 +129,7 @@ const SearchBooks = () => {
                   onChange={(e) => setSearchInput(e.target.value)}
                   type="text"
                   size="lg"
-                  placeholder="Search for a book"
+                  placeholder=""
                 />
                 <Button  type="submit" variant="light" style={{backgroundColor:'white'}}>
                   {element}
@@ -182,12 +186,13 @@ const SearchBooks = () => {
                       disabled={savedBookIds?.some(
                         (savedId) => savedId === book.bookId
                       )}
-                      className="btn-block btn-info"
+                      className="btn-light"
+                      style={{backgroundColor:'white'}}
                       onClick={() => handleSaveBook(book.bookId)}
                     >
                       {savedBookIds?.some((savedId) => savedId === book.bookId)
-                        ? "Book Already Saved!"
-                        : "Save This Book!"}
+                        ? savedIcon
+                        : addIcon}
                     </Button>
                   )}
                 </Card.Footer>
@@ -205,3 +210,4 @@ const SearchBooks = () => {
 };
 
 export default SearchBooks;
+

@@ -1,16 +1,10 @@
 import React, { useState, useEffect } from "react";
-import {
-  Modal,
-  Container,
-  Col,
-  Button,
-  Card,
-  Row,
-} from "react-bootstrap";
+import { Modal, Container, Col, Button, Card, Row } from "react-bootstrap";
 
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
+
 const info = <FontAwesomeIcon icon={faCircleInfo} size="2xl" color="" />;
 
 const apiKey = "odAC47mAXREvZ3HvHdv5XieoP4WcAzVm";
@@ -37,7 +31,10 @@ const BestSellers = () => {
 
   return (
     <>
-      <h1 className="m-4" style={{fontWeight:'bold'}}> The New York Times Best Sellers</h1>
+      <h1 className="m-4" style={{ fontWeight: "bold" }}>
+        {" "}
+        The New York Times Best Sellers
+      </h1>
       <Container className="mb-4">
         <Row>
           {lists.map((list) => {
@@ -60,16 +57,21 @@ const BestSellers = () => {
                       <Card style={{ width: "18rem" }}>
                         <Card.Img src={book_image} height={"300rem"} />
                         <Card.Body>
-                          <Card.Title style={{fontWeight:'bold'}}>{title}</Card.Title>
+                          <Card.Title style={{ fontWeight: "bold" }}>
+                            {title}
+                          </Card.Title>
                           <p>{author}</p>
-                          
-                          
                         </Card.Body>
-                        <Card.Footer style={{backgroundColor:'white', border:'none'}}>
+                        <Card.Footer
+                          style={{ backgroundColor: "white", border: "none" }}
+                        >
                           <Button
-                            variant=""   
+                            variant=""
                             onClick={() => handleShow(book.description)}
-                            style={{ backgroundColor: "white", alignSelf:'end' }}
+                            style={{
+                              backgroundColor: "white",
+                              alignSelf: "end",
+                            }}
                           >
                             {info}
                           </Button>
@@ -89,6 +91,23 @@ const BestSellers = () => {
                               <Button variant="secondary" onClick={handleClose}>
                                 Close
                               </Button>
+
+                              {/* {Auth.loggedIn() && (
+                                <Button
+                                  disabled={savedBookIds?.some(
+                                    (savedId) => savedId === book.bookId
+                                  )}
+                                  className="btn-light"
+                                  style={{ backgroundColor: "white" }}
+                                  onClick={() => handleSaveBook(book.bookId)}
+                                >
+                                  {savedBookIds?.some(
+                                    (savedId) => savedId === book.bookId
+                                  )
+                                    ? savedIcon
+                                    : addIcon}
+                                </Button>
+                              )} */}
                             </Modal.Footer>
                           </Modal>
                         </Card.Footer>
@@ -106,5 +125,3 @@ const BestSellers = () => {
 };
 
 export default BestSellers;
-
-
