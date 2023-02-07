@@ -7,13 +7,16 @@ import {
   Button,
   Row
 } from 'react-bootstrap';
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useQuery, useMutation } from '@apollo/client';
 import { QUERY_ME } from '../utils/queries';
 import { REMOVE_BOOK } from '../utils/mutations';
 import { removeBookId } from '../utils/localStorage';
 
 import Auth from '../utils/auth';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
+
+const deleteicon = <FontAwesomeIcon icon={faTrash} size="2xl" color="" />;
 
 const SavedBooks = () => {
   const { loading, data } = useQuery(QUERY_ME);
@@ -50,7 +53,7 @@ const SavedBooks = () => {
     <>
       <Jumbotron fluid>
         <Container>
-          <h1 class="bookShelfHead">Your Bookshlef..</h1>
+          <h1 class="bookShelfHead">Your Bookshelf..</h1>
         </Container>
       </Jumbotron>
       <Container>
@@ -65,13 +68,12 @@ const SavedBooks = () => {
         <Row xs={1} md={2} className="g-4">
           {userData.savedBooks?.map((book) => {
             return (
-              <Card key={book.bookId} border="dark" style={{ width: '20rem', height:'30rem', margin:'1.5rem'}} id="bookshelf">
+              <Card key={book.bookId} border="dark" style={{ width: '18rem', height:'30rem', margin:'1.5rem'}} id="bookshelf">
                 {book.image ? (
                   <Card.Img
                     src={book.image}
                     height={"300rem"}
                     alt={`The cover for ${book.title}`}
-                    variant="top"
                   />
                 ) : null}
                 <Card.Body>
@@ -79,11 +81,25 @@ const SavedBooks = () => {
                   <Card.Text className="small">Authors: {book.authors}</Card.Text>
 
                   <Button
-                    className="btn-block btn-danger"
+                    class="fa fa-trash"
                     onClick={() => handleDeleteBook(book.bookId)}
                   >
-                    Delete this Book!
+                    {deleteicon}
                   </Button>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 </Card.Body>
               </Card>
             );
