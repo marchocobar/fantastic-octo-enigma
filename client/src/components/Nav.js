@@ -33,7 +33,7 @@ const AppNavbar = () => {
               {/* if user is logged in show saved books and logout */}
               {Auth.loggedIn() ? (
                 <>
-                <NavDropdown title={user} style={{paddingRight:'80px', paddingTop:'7px'}}>
+                <NavDropdown title={user} style={{paddingRight:'70px', paddingTop:'7px'}}>
                 <NavDropdown.Item as={Link} to='/saved'>My Bookshelf</NavDropdown.Item>
                 <NavDropdown.Item onClick={Auth.logout}>Logout</NavDropdown.Item>
                 </NavDropdown>
