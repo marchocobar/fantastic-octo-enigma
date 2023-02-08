@@ -1,25 +1,30 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   Jumbotron,
   Container,
   CardColumns,
   Card,
   Button,
-  Row
+  Row,
+  Modal
 } from 'react-bootstrap';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useQuery, useMutation } from '@apollo/client';
 import { QUERY_ME } from '../utils/queries';
 import { REMOVE_BOOK } from '../utils/mutations';
 import { removeBookId } from '../utils/localStorage';
-
+import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 
 import Auth from '../utils/auth';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 const deleteicon = <FontAwesomeIcon icon={faTrash} size="2xl" color="" />;
-
+const info = <FontAwesomeIcon icon={faCircleInfo} size="2xl" color=""/>;
 const SavedBooks = () => {
+  const [show, setShow] = useState(undefined);
+
+  const handleClose = () => setShow(false);
+  const handleShow = (id) => setShow(id);
   const { loading, data } = useQuery(QUERY_ME);
   const [removeBook, { error }] = useMutation(REMOVE_BOOK);
 
@@ -81,27 +86,33 @@ const SavedBooks = () => {
                   <Card.Title>{book.title}</Card.Title>
                   <Card.Text className="small">Authors: {book.authors}</Card.Text>
 
+                  
+                </Card.Body>
+                <Card.Footer>
+                  
+                  <Button variant="" onClick={()=>handleShow(book.bookId)} style={{backgroundColor:'white'}}  >
+                    {info}
+                  </Button>
                   <Button
                     class="fa fa-trash"
                     onClick={() => handleDeleteBook(book.bookId)}
                   >
                     {deleteicon}
                   </Button>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                </Card.Body>
+                  <Modal scrollable size="xl" show={show===book.bookId} onHide={handleClose} key={book.bookId}>
+                    <Modal.Header closeButton>
+                      <Modal.Title>Description</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                      {book.description}
+                      </Modal.Body>
+                    <Modal.Footer >
+                      <Button variant="secondary" onClick={handleClose}>
+                        Close
+                      </Button>
+                    </Modal.Footer>
+                  </Modal>
+                </Card.Footer>
               </Card>
             );
           })}
