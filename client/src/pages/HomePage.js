@@ -16,7 +16,6 @@ import NoCover from "../assets/image/NoCoverAvailable.png"
 
 import { useMutation } from "@apollo/client";
 import { SAVE_BOOK } from "../utils/mutations";
-import { saveBookIds, getSavedBookIds } from "../utils/localStorage";
 
 import Auth from "../utils/auth";
 
@@ -43,14 +42,10 @@ const SearchBooks = () => {
   const [searchInput, setSearchInput] = useState("");
 
  
-  const [savedBookIds, setSavedBookIds] = useState(getSavedBookIds());
+  const [savedBookIds, setSavedBookIds] = useState([]);
 
   const [saveBook, { error }] = useMutation(SAVE_BOOK);
 
-  
-  useEffect(() => {
-    return () => saveBookIds(savedBookIds);
-  });
 
   
   const handleFormSubmit = async (event) => {
@@ -70,7 +65,7 @@ const SearchBooks = () => {
       }
 
       const { items } = await response.json();
-
+      console.log(items)
       const bookData = items.map((book) => ({
         bookId: book.id,
         authors: book.volumeInfo.authors || ["No author to display"],
@@ -78,7 +73,7 @@ const SearchBooks = () => {
         description: book.volumeInfo.description,
         image: book.volumeInfo.imageLinks?.thumbnail || "",
       }));
-
+      
       setSearchedBooks(bookData);
       setSearchInput("");
     } catch (err) {
@@ -126,7 +121,7 @@ const SearchBooks = () => {
                   onChange={(e) => setSearchInput(e.target.value)}
                   type="text"
                   size="lg"
-                  placeholder=""
+                  
                 />
                 <Button  type="submit" variant="light" style={{backgroundColor:'white'}}>
                   {element}

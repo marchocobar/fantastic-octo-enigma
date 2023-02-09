@@ -12,7 +12,6 @@ import SignUpForm from "./SignupForm";
 import LoginForm from "./LoginForm";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
-import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import Auth from "../utils/auth";
 import logo from "../assets/image/ShelfLifeLogo.png";
 
