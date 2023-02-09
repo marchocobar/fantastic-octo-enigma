@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {
-  Jumbotron,
   Container,
   Col,
   Card,
@@ -33,21 +32,17 @@ const SavedBooks = () => {
   
   const handleDeleteBook = async (bookId) => {
     const token = Auth.loggedIn() ? Auth.getToken() : null;
-
     if (!token) {
       return false;
     }
-
     try {
       const { data } = await removeBook({
         variables: { bookId },
       });
-
     } catch (err) {
       console.error(err);
     }
   };
-
   if (loading) {
     return <h2>LOADING...</h2>;
   }
@@ -55,16 +50,16 @@ const SavedBooks = () => {
   return (
     <>
       
-        <Container fluid>
-          <h1 ></h1>
+        <Container fluid >
+          <h1></h1>
         </Container>
       
-      <Container>
-        <Row>
+      <Container className='mb-5'>
+        <Row >
           {userData.savedBooks?.map((book) => {
             return (
-              <Col className="col-sm-2 d-flex pt-4" style={{alignItems: 'stretch', justifyContent:'center'}}>
-              <Card key={book.bookId} style={{ backgroundColor: 'white', border: 'none', width:'18rem'}} id="bookshelf">
+              <Col className="col-sm-2 d-flex pt-4" style={{alignItems: 'stretch', justifyContent:'center', borderBottom:'solid tan 8px'}}>
+              <Card key={book.bookId} style={{ backgroundColor: 'white', border: 'none', width:'18rem', marginBottom:'4px'}} id="bookshelf">
                 {book.image ? (
                   <Card.Img
                     src={book.image}

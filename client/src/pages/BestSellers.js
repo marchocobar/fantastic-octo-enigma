@@ -74,7 +74,7 @@ const BestSellers = () => {
         The New York Times Best Sellers
       </h1>
       <Container className="mb-4">
-        <Row>
+        <Row style={{justifyContent:"center"}}>
           {lists.map((list) => {
             const { list_name, list_id, books } = list;
             return (
